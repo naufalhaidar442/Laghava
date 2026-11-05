@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="jadwal.css">
+    <title>Jadwal Kuliah</title>
+</head>
+
+<body>
+    <div class="sideBar">
+        <a href="../index.html">Dashboard</a>
+        <a href="#" class="active">Jadwal Kuliah</a>
+        <a href="#">Materi</a>
+        <a href="#">Tugas</a>
+        <a href="#">Pengaturan</a>
+    </div>
+
+    <div class="mainView">
+        <div class="title">
+            <h1>JADWAL KULIAH</h1>
+        </div>
+
+        <div class="content">
+            <!-- ============ TABEL ============ -->
+            <div class="tabelJadwal">
+                <table id="tabelJadwal">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Hari</th>
+                            <th>Mata Kuliah</th>
+                            <th>Dosen</th>
+                            <th>Ruangan</th>
+                            <th>Waktu</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyJadwal">
+                        <tr>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ============ FORM TAMBAH ============ -->
+            <div class="aturJadwal">
+                <h4>Tambah Jadwal</h4>
+                <form id="formJadwal">
+                    <input type="text" name="hari" placeholder="Hari" required>
+                    <input type="text" name="matkul" placeholder="Mata Kuliah" required>
+                    <input type="text" name="dosen" placeholder="Nama Dosen" required>
+                    <input type="text" name="ruangan" placeholder="Ruangan" required>
+                    <input type="time" name="mulai" required>
+                    <input type="time" name="selesai" required>
+                    <button type="submit" class="btn-tambah">+</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="jadwal.js"></script>
+</body>
+
+</html>

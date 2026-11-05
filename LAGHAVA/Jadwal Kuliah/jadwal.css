@@ -1,0 +1,513 @@
+/* ============================================================
+   THEME TOKENS
+   ============================================================ */
+:root {
+    --bg: #f5f7fb;
+    --card-bg: #ffffff;
+    --sidebar-bg: #1e293b;
+    --sidebar-text: #cbd5e1;
+    --sidebar-hover: #334155;
+    --sidebar-active: #6366f1;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --accent: #6366f1;
+    --accent-soft: #eef2ff;
+    --border: #e2e8f0;
+    --radius: 14px;
+    --sidebar-w: 240px;
+    --shadow:
+        0 1px 2px rgba(15, 23, 42, 0.04),
+        0 4px 16px rgba(15, 23, 42, 0.06);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family:
+        system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    min-height: 100vh;
+}
+
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ============================================================
+   SIDEBAR (kiri)
+   ============================================================ */
+.sideBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--sidebar-w);
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    padding: 22px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow-y: auto;
+    z-index: 100;
+    scrollbar-width: thin;
+    scrollbar-color: #475569 transparent;
+}
+
+.sideBar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sideBar::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 4px;
+}
+
+.sideBar a {
+    display: flex;
+    align-items: center;
+    padding: 11px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: inherit;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.sideBar a:hover {
+    background: var(--sidebar-hover);
+    color: #ffffff;
+    transform: translateX(2px);
+}
+
+.sideBar a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Highlight tombol pertama sebagai "aktif" */
+.sideBar a:nth-child(2) {
+    background: var(--sidebar-active);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+}
+
+.sideBar a:nth-child(2):hover {
+    background: #4f46e5;
+}
+
+/* ============================================================
+   MAIN VIEW
+   ============================================================ */
+.mainView {
+    margin-left: var(--sidebar-w);
+    padding: 34px 40px 48px;
+    min-height: 100vh;
+}
+
+/* Title bar */
+.title h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 26px;
+    background: linear-gradient(90deg, #0f172a, #475569);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ============================================================
+   CONTENT GRID (2 kolom di desktop, 1 di mobile)
+   ============================================================ */
+.content {
+    display: grid;
+    align-items: start;
+}
+
+/* Kartu */
+.content>div {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 22px 20px;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.content>div:hover {
+    box-shadow:
+        0 2px 4px rgba(15, 23, 42, 0.06),
+        0 12px 28px rgba(15, 23, 42, 0.08);
+}
+
+
+/* ============================================================
+   TABEL JADWAL
+   ============================================================ */
+.tabelJadwal {
+    padding: 0;
+    /* override .content > div padding agar header tabel full width */
+    overflow: hidden;
+    /* sudut membulat ikut card */
+}
+
+#tabelJadwal {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+#tabelJadwal thead th {
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    background: #f8fafc;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+#tabelJadwal tbody td {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+    color: var(--text);
+}
+
+/* Zebra + hover */
+#tabelJadwal tbody tr:nth-child(even) {
+    background: #fafbff;
+}
+
+#tabelJadwal tbody tr:hover {
+    background: var(--accent-soft);
+}
+
+#tabelJadwal tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Kolom nomor sempit & rata tengah */
+#tabelJadwal th:first-child,
+#tabelJadwal td:first-child {
+    width: 60px;
+    text-align: center;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Kolom waktu jangan wrap */
+#tabelJadwal td:nth-child(5) {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+#tabelJadwal td button {
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    margin-left: 6px;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+#tabelJadwal .btn-edit {
+    color: #4f46e5;
+    background: #eef2ff;
+    border-color: #c7d2fe;
+}
+
+#tabelJadwal .btn-edit:hover {
+    background: #e0e7ff;
+}
+
+#tabelJadwal .btn-hapus {
+    color: #dc2626;
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+
+#tabelJadwal .btn-hapus:hover {
+    background: #fee2e2;
+}
+
+/* ============================================================
+   FORM TAMBAH JADWAL
+   ============================================================ */
+.aturJadwal h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+#formJadwal {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) auto;
+    gap: 10px;
+    align-items: center;
+}
+
+#formJadwal input {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text);
+    background: #fff;
+    width: 100%;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+#formJadwal input::placeholder {
+    color: #94a3b8;
+}
+
+#formJadwal input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.btn-tambah {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s, box-shadow 0.15s;
+}
+
+.btn-tambah:hover {
+    background: #4f46e5;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+}
+
+/* ============================================================
+   RESPONSIVE — HP & TABLET
+   ============================================================ */
+
+/* Tablet: form jadi 2 kolom */
+@media (max-width: 900px) {
+    #formJadwal {
+        grid-template-columns: 1fr 1fr;
+    }
+    #formJadwal .btn-tambah {
+        grid-column: span 2;
+    }
+}
+
+/* ============================================================
+   HP (<= 768px)
+   ============================================================ */
+@media (max-width: 768px) {
+    /* ---------- Sidebar → bottom-nav ---------- */
+    .sideBar {
+        top: auto;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 68px;
+        flex-direction: row;
+        padding: 8px;
+        gap: 4px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        justify-content: flex-start;
+        border-top: 1px solid #334155;
+        scrollbar-width: none;
+    }
+    .sideBar::-webkit-scrollbar { display: none; }
+
+    .sideBar a {
+        flex: 0 0 auto;              /* tidak memaksa melebar */
+        justify-content: center;
+        padding: 8px 14px;
+        font-size: 12px;
+        white-space: nowrap;
+        text-align: center;
+    }
+    .sideBar a:hover { transform: none; }
+
+    /* Nonaktifkan highlight posisi "aktif" (nth-child) di mobile,
+       pakai class .active saja supaya konsisten */
+    .sideBar a:nth-child(2) {
+        background: transparent;
+        color: inherit;
+        box-shadow: none;
+    }
+    .sideBar a.active {
+        background: var(--sidebar-active);
+        color: #fff;
+        box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+    }
+
+    /* ---------- Main view ---------- */
+    .mainView {
+        margin-left: 0;
+        /* padding bawah besar supaya tidak ketutup bottom-nav (68px)
+           + ruang untuk scroll nyaman */
+        padding: 22px 16px 120px;
+        /* minimal setinggi viewport supaya kartu tidak "menggantung" */
+        min-height: 100dvh;
+    }
+
+    .title h1 {
+        font-size: 22px;
+        margin-bottom: 18px;
+    }
+
+    .content {
+        display: block;              /* jangan grid di HP */
+    }
+
+    .content > div {
+        padding: 16px 16px 14px;
+        margin-bottom: 16px;
+    }
+
+    .tabelJadwal {
+        padding: 8px;                /* kasih napas dalam kartu */
+        overflow: hidden;            /* pastikan tidak ada scroll horizontal */
+    }
+}
+
+/* ============================================================
+   HP kecil (<= 640px): form 1 kolom
+   ============================================================ */
+@media (max-width: 640px) {
+    #formJadwal {
+        grid-template-columns: 1fr;
+    }
+    #formJadwal .btn-tambah {
+        grid-column: 1;
+        width: 100%;
+    }
+}
+
+/* ============================================================
+   TABEL → KARTU (<= 640px)
+   ============================================================ */
+@media (max-width: 640px) {
+
+    /* Reset semua elemen tabel jadi block */
+    #tabelJadwal,
+    #tabelJadwal thead,
+    #tabelJadwal tbody,
+    #tabelJadwal tr,
+    #tabelJadwal th,
+    #tabelJadwal td {
+        display: block;
+        width: 100%;
+        min-width: 0;                /* penting: cegah flex melebar keluar */
+        max-width: 100%;
+    }
+
+    #tabelJadwal thead {
+        display: none;               /* header tabel disembunyikan */
+    }
+
+    #tabelJadwal {
+        border-collapse: collapse;
+        table-layout: fixed;         /* <- kunci supaya tidak melebar */
+        overflow: hidden;
+    }
+
+    #tabelJadwal tbody tr {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        margin: 0 0 12px 0;
+        padding: 6px 0;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+    #tabelJadwal tbody tr:nth-child(even) { background: #fff; }
+
+    #tabelJadwal tbody td {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 9px 14px;
+        border-bottom: 1px dashed #f1f5f9;
+        text-align: right;
+        font-size: 14px;
+        overflow-wrap: anywhere;     /* nama panjang tetap wrap, tidak meluber */
+        word-break: break-word;
+    }
+    #tabelJadwal tbody td:last-child { border-bottom: none; }
+
+    /* Label dari data-label */
+    #tabelJadwal tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        font-size: 12px;
+        color: var(--text-muted);
+        text-align: left;
+        flex: 0 0 40%;               /* label lebar tetap supaya rapi */
+    }
+
+    /* Nilai di kanan */
+    #tabelJadwal tbody td > * {
+        min-width: 0;
+    }
+
+    /* Kolom nomor: sembunyikan di tampilan kartu (tidak perlu) */
+    #tabelJadwal tbody td:first-child {
+        display: none;
+    }
+
+    /* Kolom aksi rata kanan penuh */
+    #tabelJadwal td.aksi {
+        justify-content: flex-end;
+        padding-top: 12px;
+    }
+    #tabelJadwal td.aksi::before { content: none; }
+
+    #tabelJadwal td button {
+        margin-left: 0;
+    }
+}
+
+/* ============================================================
+   HP sangat kecil (<= 380px)
+   ============================================================ */
+@media (max-width: 380px) {
+    .mainView {
+        padding: 18px 12px 110px;
+    }
+    .title h1 {
+        font-size: 19px;
+    }
+    #tabelJadwal tbody td {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+    #tabelJadwal tbody td::before {
+        flex-basis: 45%;
+    }
+}
